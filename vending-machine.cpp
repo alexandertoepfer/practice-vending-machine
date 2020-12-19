@@ -20,7 +20,7 @@ bool doubleEquals( double firstVal, double secondVal ) {
 ** It only contains of one simple identifier as of now which is the name
 ** and is implemented as structure since it is rather trivial
 */
-struct Drink {
+class Drink {
     std::string name;
     // -------------------------
     // Constructors
@@ -29,6 +29,7 @@ struct Drink {
     Drink( const char* name ) : name( std::string( name ) ) {}
     Drink( const Drink& other ) : name( other.name ) {}
     std::string toString() { return this->name; }
+	inline bool operator==( const std::string& right ) { return ( this.name == right ); }
 };
 
 /**
@@ -36,7 +37,6 @@ struct Drink {
  * the beverage without having to access attributes
  * @expression Drink == "Coca Cola"
  */
-inline bool operator==( const Drink& left, const std::string& right ) { return ( left.name == right ); }
 
 /**
 ** Class to represent currency which can be used when interacting with
