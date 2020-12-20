@@ -29,7 +29,7 @@ class Drink {
     Drink( const char* name ) : name( std::string( name ) ) {}
     Drink( const Drink& other ) : name( other.name ) {}
     std::string toString() { return this->name; }
-	inline bool operator==( const std::string& right ) { return ( this.name == right ); }
+    inline bool operator==( const std::string& right ) { return ( this->name == right ); }
 };
 
 /**
