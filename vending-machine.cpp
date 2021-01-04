@@ -21,6 +21,7 @@ bool doubleEquals( double firstVal, double secondVal ) {
 ** and is implemented as structure since it is rather trivial
 */
 class Drink {
+    public:
     std::string name;
     // -------------------------
     // Constructors
@@ -262,13 +263,11 @@ class VendingMachine {
         template< typename T >
         DrinkType buy( T selector, CountType amount, PriceType& change ) {
             typename std::vector< Slot >::iterator it = this->drinks.begin();
-            DrinkType* drink = nullptr;
-            PriceType* cost = nullptr;
+            Slot* slot = nullptr;
             // iterate drinks to find the selected one
             for ( ;it != this->drinks.end(); ++it ) {
                 if ( it->drink == selector ) {
-                    drink = &it->drink;
-                    cost = &it->price;
+                    slot = &(*it);
                     if ( (amount <= it->amount) && (change >= (it->price * (int)amount)) ) {
                         it->amount -= amount;
                         break;
@@ -278,8 +277,8 @@ class VendingMachine {
             // if the selection was found in the vending machine
             if ( it != this->drinks.end() ) {
                 for ( CountType i = 0; i < amount; i++ )
-                    change = change - (*cost);
-                DrinkType temp( *drink );
+                    change = change - (slot->price);
+                DrinkType temp( slot->drink );
                 return temp; // return found object
             }
             Drink temp;
